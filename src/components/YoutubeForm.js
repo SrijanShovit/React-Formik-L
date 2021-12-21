@@ -1,5 +1,5 @@
 import React from 'react'
-import {Formik,Form,Field} from 'formik'
+import {Formik,Form,Field,ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 
 const initialValues = {   
@@ -34,14 +34,14 @@ function YoutubeForm() {
                 <label htmlFor="name">Name</label>
                 <Field type="text" id="name" name="name" 
                 />
-                {formikobj.touched.name && formikobj.errors.name ? <div className="error">{formikobj.errors.name}</div> : null}
+                <ErrorMessage name="name"/>
                 </div>
 
                 <div className="form-control">
                 <label htmlFor="email">E-mail</label>
                 <Field type="email" id="email" name="email" 
                 />
-                 {formikobj.touched.email && formikobj.errors.email ? <div className="error">{formikobj.errors.email}</div> : null}
+                  <ErrorMessage name="email"/>
                 </div>
 
                 <div className="form-control">
@@ -49,7 +49,7 @@ function YoutubeForm() {
                 <label htmlFor="channel">Channel</label>
                 <Field type="text" id="channel" name="channel" 
                 />
-                 {formikobj.touched.channel && formikobj.errors.channel ? <div className="error">{formikobj.errors.channel}</div> : null}
+                 <ErrorMessage name="channel"/>
                 </div>
 
                 <button type="submit">Submit</button>
@@ -63,5 +63,7 @@ Field does 3 things behind the scene
 1.Hook up input to top level form component
 2.Uses name attribute to match up form state
 3.Field will render an input element
+
+ErrorMessage will do exactly what we did manually for error handling
 */
 export default YoutubeForm
