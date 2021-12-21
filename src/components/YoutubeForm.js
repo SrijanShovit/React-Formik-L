@@ -5,7 +5,9 @@ import * as Yup from 'yup'
 const initialValues = {   
     name:'Srijan',
     email:'',
-    channel:''
+    channel:'',
+    comments:'',
+    address:'',
 }
 
 const onSubmit = values => {
@@ -52,6 +54,35 @@ function YoutubeForm() {
                  <ErrorMessage name="channel"/>
                 </div>
 
+                <div className="form-control">
+                    <label htmlFor="comments">Comments</label>
+                    <Field 
+                    as="textarea"
+                    // component="textarea"
+                    id="comments" name="comments"/>
+                </div>
+
+                <div className="form-control">
+                    <label htmlFor="address">Address</label>
+                    <Field name="address" >
+                        {/* we pass in an arrow function as children */}
+                        {
+                            (props)=>{
+                                console.log('Render Props',props)
+                                const {field,form,meta} = props
+                              return  (
+                                  <div>
+                                    <input type="text" id='address' {...field}/>
+                                    {meta.touched && meta.error 
+                                    ? <div>{meta.error}</div> 
+                                    : null}
+                                  </div>
+                              )
+                            }
+                        }
+                    </Field>
+                </div>
+
                 <button type="submit">Submit</button>
             </Form>
         </Formik>
@@ -59,11 +90,7 @@ function YoutubeForm() {
 }
 
 /* 
-Field does 3 things behind the scene
-1.Hook up input to top level form component
-2.Uses name attribute to match up form state
-3.Field will render an input element
+Any additional props in the field component will be passed through
 
-ErrorMessage will do exactly what we did manually for error handling
 */
 export default YoutubeForm
