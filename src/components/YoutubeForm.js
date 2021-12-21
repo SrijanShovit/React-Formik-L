@@ -1,5 +1,6 @@
 import React from 'react'
 import {useFormik} from 'formik'
+import * as Yup from 'yup'
 
 const initialValues = {   
     name:'Srijan',
@@ -35,6 +36,11 @@ const validate= values=> {
     return errors
 }
 
+const validationSchema = Yup.object({
+    name: Yup.string().required('Required'),
+    email : Yup.string().email("Invalid email format").required("Required"),
+    channel : Yup.string().required('Required'),
+})
 
 function YoutubeForm() {
 
@@ -42,7 +48,8 @@ function YoutubeForm() {
     const formikobj = useFormik({
         initialValues,        
         onSubmit,
-        validate 
+        // validate 
+        validationSchema
     })
 
     console.log('Form errors',formikobj.errors)
