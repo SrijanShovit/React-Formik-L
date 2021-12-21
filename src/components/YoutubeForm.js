@@ -1,5 +1,5 @@
 import React from 'react'
-import {Formik,Form} from 'formik'
+import {Formik,Form,Field} from 'formik'
 import * as Yup from 'yup'
 
 const initialValues = {   
@@ -32,16 +32,14 @@ function YoutubeForm() {
                 <div className="form-control">
 
                 <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" 
-               {...formikobj.getFieldProps('name')}
+                <Field type="text" id="name" name="name" 
                 />
                 {formikobj.touched.name && formikobj.errors.name ? <div className="error">{formikobj.errors.name}</div> : null}
                 </div>
 
                 <div className="form-control">
                 <label htmlFor="email">E-mail</label>
-                <input type="email" id="email" name="email" 
-                 {...formikobj.getFieldProps('email')}
+                <Field type="email" id="email" name="email" 
                 />
                  {formikobj.touched.email && formikobj.errors.email ? <div className="error">{formikobj.errors.email}</div> : null}
                 </div>
@@ -49,8 +47,7 @@ function YoutubeForm() {
                 <div className="form-control">
 
                 <label htmlFor="channel">Channel</label>
-                <input type="text" id="channel" name="channel" 
-                {...formikobj.getFieldProps('channel')}
+                <Field type="text" id="channel" name="channel" 
                 />
                  {formikobj.touched.channel && formikobj.errors.channel ? <div className="error">{formikobj.errors.channel}</div> : null}
                 </div>
@@ -61,4 +58,10 @@ function YoutubeForm() {
     )
 }
 
+/* 
+Field does 3 things behind the scene
+1.Hook up input to top level form component
+2.Uses name attribute to match up form state
+3.Field will render an input element
+*/
 export default YoutubeForm
