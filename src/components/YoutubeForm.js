@@ -1,47 +1,87 @@
 import React from 'react'
 import {useFormik} from 'formik'
 
+const initialValues = {   
+    name:'Srijan',
+    email:'',
+    channel:''
+}
+
+const onSubmit = values => {
+    console.log('Form data',values)
+}
+
+const validate= values=> {
+    //Imp points about validate
+    //1.should return an object
+    //2.Properties of this object should be same as properties of values
+    //3.Values for these keys should be string indicating error messages for these keys
+
+    let errors = {}
+
+    if(!values.name){
+        errors.name = 'Required'
+    }
+
+    if (!values.email){
+        errors.email = 'Required'
+    }else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)){
+        errors.email = 'Invalid email format'
+    }
+
+    if (!values.channel){
+        errors.channel = 'Required'
+    }
+    return errors
+}
+
+
 function YoutubeForm() {
 
-    //useFormik hook takes an object as parameter and also returns an object
+   
     const formikobj = useFormik({
-        initialValues:{
-            //contain intial values for all state variables
-            //these property names should be same as the name in label
-            name:'Srijan',
-            email:'',
-            channel:'',
-        },
-        //accepts values as arguments
-        //values is same as that we were referring through formikobj.values
-        //this inSubmit will automatically execute whhen submit button in form is pressed
-        onSubmit: values => {
-            console.log('Form data',values)
-        }
+        initialValues,        
+        onSubmit,
+        validate 
     })
 
-    //Formik object will always reflect state of the form
-    // console.log('Formik values', formikobj.values)
+    console.log('Form errors',formikobj.errors)
+    console.log('Visited fields',formikobj.touched)
+    
     return (
         <div>
             <form onSubmit={formikobj.handleSubmit}>
+                <div className="form-control">
+
                 <label htmlFor="name">Name</label>
                 <input type="text" id="name" name="name" 
                 onChange={formikobj.handleChange}
+                onBlur={formikobj.handleBlur} 
                 value={formikobj.values.name}
                 />
+                {formikobj.touched.name && formikobj.errors.name ? <div className="error">{formikobj.errors.name}</div> : null}
+                </div>
 
+                <div className="form-control">
                 <label htmlFor="email">E-mail</label>
                 <input type="email" id="email" name="email" 
                 onChange={formikobj.handleChange}
+                onBlur={formikobj.handleBlur}  //keep track of visited fields
                 value={formikobj.values.email}
                 />
+                 {formikobj.touched.email && formikobj.errors.email ? <div className="error">{formikobj.errors.email}</div> : null}
+                </div>
+
+                <div className="form-control">
 
                 <label htmlFor="channel">Channel</label>
                 <input type="text" id="channel" name="channel" 
                 onChange={formikobj.handleChange}
+                onBlur={formikobj.handleBlur} 
                 value={formikobj.values.channel}
                 />
+                 {formikobj.touched.channel && formikobj.errors.channel ? <div className="error">{formikobj.errors.channel}</div> : null}
+                </div>
 
                 <button type="submit">Submit</button>
             </form>
