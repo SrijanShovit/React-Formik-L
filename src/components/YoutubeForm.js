@@ -17,8 +17,10 @@ const initialValues = {
     phNumbers:['']
 }
 
-const onSubmit = values => {
+const onSubmit = (values,onSubmitProps) => {
     console.log('Form data',values)
+    console.log('Submit props',onSubmitProps)
+    onSubmitProps.setSubmitting(false)
 }
 
 
@@ -86,7 +88,9 @@ function YoutubeForm() {
                         <Field 
                         as="textarea"
                         // component="textarea"
-                        id="comments" name="comments" validate={validationComments}/>
+                        id="comments" name="comments" 
+                        validate={validationComments}
+                        />
                         <ErrorMessage name="comments" components={TextError}/>
                     </div>
     
@@ -180,7 +184,7 @@ function YoutubeForm() {
                     })}
                     >Visit all</button>
                     {/* dirty should be used only if we are sure that user will interact with our app and the submitting values would be diff from initial values */}
-                    <button type="submit" disabled={!(formik.dirty && formik.isValid)}>Submit</button>
+                    <button type="submit" disabled={!formik.isValid || formik.isSubmitting}>Submit</button>
                 </Form>
                 )
             }
