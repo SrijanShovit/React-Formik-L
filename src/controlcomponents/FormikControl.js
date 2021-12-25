@@ -5,6 +5,7 @@ import Select from './Select'
 import RadioButton from './RadioButtons'
 import CheckboxGroup from './CheckBoxGroup'
 import DatePicker from './DatePicker'
+import ChakraInput from './ChakraInput'
 
 function FormikControl(props) {
     const {control,...rest} = props
@@ -15,6 +16,7 @@ function FormikControl(props) {
         case 'radio': return <RadioButton {...rest}/>
         case 'checkbox': return <CheckboxGroup {...rest}/>
         case 'date': return <DatePicker {...rest}/>
+        case 'chakrainput': return <ChakraInput {...rest}/>
         default: return null
     }
 }

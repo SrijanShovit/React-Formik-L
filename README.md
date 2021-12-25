@@ -8,4 +8,7 @@
 6) Validate function
 7) Validation schema
 8) Validationformik.errors and formik.touched
-9) Formik components - Formik,Form,Fiels and ErrorMessage
+9) Formik components - Formik,Form,Field,FastField,FieldArray and ErrorMessage
+10) Reusable components for input,textarea,select,radio buttons,checkboxes and datepicker
+11) Build a user login,registration and enrollment forms
+12) Wire up a UI library
