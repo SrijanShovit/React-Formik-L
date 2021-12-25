@@ -28,6 +28,14 @@ const validationSchema = Yup.object({
     channel : Yup.string().required('Required'),
 })
 
+const validationComments = value => {
+    let errors = {}
+    if (!value){
+        errors = 'Required'
+    }
+    return errors
+}
+
 function YoutubeForm() {
 
     return (
@@ -35,8 +43,7 @@ function YoutubeForm() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        //not to run validation function on onChage event
-        validateOnChange={false}
+       
         >
             <Form>  
                 {/* Form automatically handles onSubmit for our form */}
@@ -74,7 +81,8 @@ function YoutubeForm() {
                     <Field 
                     as="textarea"
                     // component="textarea"
-                    id="comments" name="comments"/>
+                    id="comments" name="comments" validate={validationComments}/>
+                    <ErrorMessage name="comments" components={TextError}/>
                 </div>
 
                 <div className="form-control">
@@ -157,10 +165,7 @@ function YoutubeForm() {
 }
 
 /* 
-Form errors get populated/form validation runs when
-1.we start typing in a field(onChange)
-2.we click on a field and click outside(onBlur)
-3.without interacting with any of the fields we directly click on submit button(Direct Submission)
+ValidationSchema and validate provide validation at top level but we can also have validation on FieldLevel
 
 */
 export default YoutubeForm
