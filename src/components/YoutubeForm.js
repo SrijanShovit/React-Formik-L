@@ -1,5 +1,5 @@
 import React from 'react'
-import {Formik,Form,Field,ErrorMessage,FieldArray} from 'formik'
+import {Formik,Form,Field,ErrorMessage,FieldArray,FastField} from 'formik'
 import * as Yup from 'yup'
 import TextError from './TextError'
 
@@ -77,11 +77,11 @@ function YoutubeForm() {
 
                 <div className="form-control">
                     <label htmlFor="address">Address</label>
-                    <Field name="address" >
+                    <FastField name="address" >
                         {/* we pass in an arrow function as children */}
                         {
                             (props)=>{
-                                // console.log('Render Props',props)
+                                console.log('Field render')
                                 const {field,form,meta} = props
                               return  (
                                   <div>
@@ -93,7 +93,7 @@ function YoutubeForm() {
                               )
                             }
                         }
-                    </Field>
+                    </FastField>
                 </div>
 
                 <div className="form-control">
@@ -118,7 +118,7 @@ function YoutubeForm() {
                     <FieldArray name='phNumbers'>
                         {
                             fieldArrayProps => {
-                                console.log('fieldArrayProps', fieldArrayProps)
+                                // console.log('fieldArrayProps', fieldArrayProps)
                                 const {push,remove,form} = fieldArrayProps
                                 const {values} = form
                                 const {phNumbers} = values
@@ -154,7 +154,7 @@ function YoutubeForm() {
 }
 
 /* 
-Any additional props in the field component will be passed through
+// FastField is an optimisation of field component to block re-render when there is change in other components unless there is direct change in FastField component itself.
 
 */
 export default YoutubeForm
