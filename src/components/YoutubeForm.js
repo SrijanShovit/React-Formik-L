@@ -44,6 +44,7 @@ function YoutubeForm() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
+        // validateOnMount
        
         >{
             formik => {
@@ -178,7 +179,8 @@ function YoutubeForm() {
                         comments:true,
                     })}
                     >Visit all</button>
-                    <button type="submit">Submit</button>
+                    {/* dirty should be used only if we are sure that user will interact with our app and the submitting values would be diff from initial values */}
+                    <button type="submit" disabled={!(formik.dirty && formik.isValid)}>Submit</button>
                 </Form>
                 )
             }
