@@ -1,8 +1,9 @@
 import './App.css';
+import EnrollmentForm from './controlcomponents/EnrollmentForm';
 // import YoutubeForm from './components/YoutubeForm'
 // import FormikContainer from './controlcomponents/FormikContainer';
 // import LoginForm from './controlcomponents/LoginForm';
-import RegistrationForm from './controlcomponents/RegistrationForm';
+// import RegistrationForm from './controlcomponents/RegistrationForm';
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
      {/* <YoutubeForm/> */}
      {/* <FormikContainer/> */}
      {/* <LoginForm/> */}
-     <RegistrationForm/>
+     {/* <RegistrationForm/> */}
+     <EnrollmentForm/>
     </div>
   );
 }
