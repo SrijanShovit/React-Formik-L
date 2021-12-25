@@ -35,6 +35,8 @@ function YoutubeForm() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
+        //not to run validation function on onChage event
+        validateOnChange={false}
         >
             <Form>  
                 {/* Form automatically handles onSubmit for our form */}
@@ -122,6 +124,7 @@ function YoutubeForm() {
                                 const {push,remove,form} = fieldArrayProps
                                 const {values} = form
                                 const {phNumbers} = values
+                                console.log('Form errors', form.errors)
                                 return (<div>{
                                         phNumbers.map((phNumber,index) => (     
                                                <div key={index}>
@@ -154,7 +157,10 @@ function YoutubeForm() {
 }
 
 /* 
-// FastField is an optimisation of field component to block re-render when there is change in other components unless there is direct change in FastField component itself.
+Form errors get populated/form validation runs when
+1.we start typing in a field(onChange)
+2.we click on a field and click outside(onBlur)
+3.without interacting with any of the fields we directly click on submit button(Direct Submission)
 
 */
 export default YoutubeForm
