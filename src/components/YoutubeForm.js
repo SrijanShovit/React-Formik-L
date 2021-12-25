@@ -35,6 +35,7 @@ const onSubmit = (values,onSubmitProps) => {
     console.log('Form data',values)
     console.log('Submit props',onSubmitProps)
     onSubmitProps.setSubmitting(false)
+    onSubmitProps.resetForm()
 }
 
 
@@ -100,16 +101,16 @@ function YoutubeForm() {
                      <ErrorMessage name="channel"/>
                     </div>
     
-                    <div className="form-control">
+                    {/* <div className="form-control">
                         <label htmlFor="comments">Comments</label>
                         <Field 
-                        as="textarea"
-                        // component="textarea"
+                        // as="textarea"
+                        component="textarea"
                         id="comments" name="comments" 
                         validate={validationComments}
                         />
                         <ErrorMessage name="comments" components={TextError}/>
-                    </div>
+                    </div> */}
     
                     <div className="form-control">
                         <label htmlFor="address">Address</label>
